@@ -1,8 +1,4 @@
-# Laboration 2
+Movie project in React with TMDb api.
 
-Grupprojekt i kursen `Software life cycle management`.
 
-## Gruppmedlemmar
-
-- Fredric Ryding
-- Calle Özmehak
+deployed at https://shark-movies.vercel.app/
