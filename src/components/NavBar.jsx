@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { fit } from "@cloudinary/url-gen/actions/resize";
 import React from "react";
-import Login from "./Login";
 
 function NavBar() {
   const cld = new Cloudinary({
@@ -43,7 +42,6 @@ function NavBar() {
             <Nav.Link href="/toprated">Top Rated</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
-          <Login />
           <Form className="d-flex">
             <Form.Control
               type="search"

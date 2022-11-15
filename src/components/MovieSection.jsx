@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import { Api } from "./Api";
 import { GetLists } from "./GetLists";
 
 export default function MovieSection() {
   return (
     <>
       <MovieDiv>
-        <MovieTitle>Popular now</MovieTitle>
+        <MovieTitle>Coming out this December</MovieTitle>
         <CardDiv>
-          <Api category="popular" />
+          <GetLists category="8228183"/>
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
@@ -18,9 +17,9 @@ export default function MovieSection() {
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
-        <MovieTitle>Upcoming</MovieTitle>
+        <MovieTitle>Underrated Movies</MovieTitle>
         <CardDiv>
-          <Api category="upcoming" />
+          <GetLists category="8227655" />
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
