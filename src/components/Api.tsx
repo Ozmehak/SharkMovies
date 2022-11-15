@@ -4,12 +4,12 @@ import Card from "react-bootstrap/Card";
 
 type apiProps = {
   json?: any;
-  title: string;
+  title?: string;
   item?: object;
-  poster_path: object;
-  src: string;
+  poster_path?: object;
+  src?: string;
   category: string;
-  id: number
+  id?: number
 };
 
 export const Api = (props: apiProps) => {
@@ -28,9 +28,9 @@ export const Api = (props: apiProps) => {
 
   return (
     <>
-      {content.slice(1,6).map((item) => (
+      {content.map((item) => (
         <Card key={item.id}
-          style={{ width: 350, height: 350, backgroundColor: "#131516" }}>
+          style={{ width: "10rem", backgroundColor: "#131516" }}>
           <Card.Img
             variant="top"
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
