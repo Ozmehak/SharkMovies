@@ -7,7 +7,7 @@ deployed at https://shark-movies.vercel.app/
 ###
 Collaborators:
 
-Calle Özmehak & Fredrik Ryding
+Calle Özmehak & Fredric Ryding
 
 and my wife Anna Özmehak
 
