@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import {MovieInfo} from "./MovieInfo"
@@ -56,7 +56,8 @@ export const Api = (props: apiProps) => {
           </Card.Body>
         </Card>
       ))}
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={show} onHide={handleClose} animation={false} size="lg" centered>
+
         <MovieInfo id={movieId}/>
       </Modal>
     </>
