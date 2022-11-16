@@ -1,12 +1,11 @@
-import {Header} from "../components/Header";
 import {ImageCarousel} from "../components/ImageCarousel";
 import MovieSection from "../components/MovieSection";
-import {Footer} from "../components/Footer";
 import {useCookies} from "react-cookie";
 import {useEffect, useState} from "react";
 
 import styled from "styled-components";
 import LogRocket from "logrocket";
+import Login from "../components/Login";
 
 
 export const Home = () => {
@@ -35,7 +34,8 @@ export const Home = () => {
     }
     return (
         <>
-        <Header />
+            <Login />
+
     {display && (
         <CookieDiv>
             <CookieMessage>
@@ -54,7 +54,7 @@ export const Home = () => {
     )}
     <ImageCarousel />
     <MovieSection />
-    <Footer />
+
         </>
     )
 }

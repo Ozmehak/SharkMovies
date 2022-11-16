@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-
+import {MovieInfo} from "./MovieInfo"
+import {Button, Modal} from "react-bootstrap";
 type apiProps = {
   json?: any;
-  title: string;
+  title?: string;
   item?: object;
-  poster_path: object;
-  src: string;
+  poster_path?: object;
+  src?: string;
   category: string;
-  id: number
+  id?: any
+
 };
+
+
+
 
 export const Api = (props: apiProps) => {
   const [content, setContent] = useState<apiProps[]>([]);
+
+  const [show, setShow] = useState(false);
+  const [movieId, setMovieId] = useState(undefined)
+
+  const handleClose = () => setShow(false);
+  const handleShow = (e: any) => {
+    setShow(true);
+    setMovieId(e.target.id)
+  }
+
 
 
   useEffect(() => {
@@ -28,18 +43,22 @@ export const Api = (props: apiProps) => {
 
   return (
     <>
-      {content.slice(1,6).map((item) => (
+      {content.map((item) => (
         <Card key={item.id}
-          style={{ width: 350, height: 350, backgroundColor: "#131516" }}>
+          style={{ width: "10rem", backgroundColor: "#131516" }}>
           <Card.Img
             variant="top"
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
           />
+
           <Card.Body>
-            <Card.Title >{item.title}</Card.Title>
+            <Button variant="dark" id={item.id} onClick={e => handleShow(e)}>{item.title}</Button>
           </Card.Body>
         </Card>
       ))}
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <MovieInfo id={movieId}/>
+      </Modal>
     </>
   );
 };
