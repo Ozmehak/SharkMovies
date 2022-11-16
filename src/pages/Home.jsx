@@ -6,14 +6,20 @@ import {useEffect, useState} from "react";
 import styled from "styled-components";
 import LogRocket from "logrocket";
 import Login from "../components/Login";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../firebase";
 
 
 export const Home = () => {
+
+    const [user] = useAuthState(auth);
     const [cookies, setCookie] = useCookies(["name"]);
     const [display, setDisplay] = useState(false);
 
+
+
     useEffect(() => {
-        if (!cookies.name) {
+        if (!Object.keys(cookies).includes("cookie-from-hell")) {
             setDisplay(true);
         }
     }, [cookies]);
@@ -24,7 +30,7 @@ export const Home = () => {
         let expireDate = new Date();
         expireDate.setTime(expireDate.getTime() + 1 * 3600 * 1000);
 
-        setCookie("name", "cookie-from-hell", {
+        setCookie("cookie-from-hell", `${user.email}`, {
             expires: expireDate,
             httpOnly: false,
             path: "/",
@@ -32,6 +38,9 @@ export const Home = () => {
         });
         setDisplay(false);
     }
+
+
+
     return (
         <>
             <Login />
