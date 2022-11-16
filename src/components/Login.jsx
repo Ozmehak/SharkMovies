@@ -2,6 +2,7 @@ import React  from "react";
 import { auth, signInWithGoogle, logout } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Button from "react-bootstrap/Button";
+
 function Login() {
 
     const [user] = useAuthState(auth);
