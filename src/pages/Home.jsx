@@ -60,8 +60,11 @@ export const Home = () => {
 }
 
 const AcceptBtn = styled.button`
+  background-color: #131516;
+  color: darkgrey;
   :hover {
     font-weight: bold;
+    
   }
 `;
 
@@ -78,6 +81,8 @@ const CookieDiv = styled.div`
   text-align: center;
   width: 80%;
   z-index: 1;
+  background-color: #131516;
+  color: darkgrey;
 
   @media (min-width: 769px) {
     margin-left: 30%;
@@ -92,6 +97,9 @@ const CookieMessage = styled.h3`
 
 const DeclineBtn = styled.button`
   margin-right: 25px;
+  background-color: #131516;
+  color: darkgrey;
+  
 
   :hover {
     font-weight: bold;
