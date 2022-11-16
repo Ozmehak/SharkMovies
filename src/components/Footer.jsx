@@ -51,12 +51,14 @@ border-top: 1px solid #fff;
   margin: 5% 10% 25px;
   padding-top: 25px;
   align-items: center;
+  color: #fff;
 `
 
 const Copy = styled.p`
 display: flex;
 justify-content: center;
 font-size: large;
+  color: #fff;
 `
 
 const Img = styled.img`

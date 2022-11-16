@@ -27,7 +27,7 @@ function NavBar() {
       <Container fluid>
         <Navbar.Toggle aria-controls="navbarScroll" className="p-0 px-2" />
         <img alt="logo" src={sharkLogo} />
-        <Navbar.Brand href="#" style={{ color: "#CCC9C3" }}>
+        <Navbar.Brand href="/" style={{ color: "#CCC9C3" }}>
           SharkMovies
         </Navbar.Brand>
 
@@ -37,19 +37,19 @@ function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
+
             <Nav.Link href="/popular">Popular</Nav.Link>
             <Nav.Link href="/toprated">Top Rated</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
+
           </Nav>
           <Form className="d-flex">
-            <Form.Control
+            <Form.Control style={{ backgroundColor: "rgba(19, 21, 22, 0.1)", color: "#fff", borderColor: "#0dcaf0"}}
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-info">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

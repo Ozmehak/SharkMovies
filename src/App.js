@@ -7,7 +7,7 @@ import {TopRated} from "./pages/TopRated";
 
 function App() {
     return (
-        <>
+        <div style={{backgroundColor: "#131516"}}>
             <Header/>
 
             <Router>
@@ -18,7 +18,7 @@ function App() {
                 </Routes>
             </Router>
             <Footer/>
-        </>
+        </div>
     );
 }
 

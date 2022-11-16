@@ -52,7 +52,7 @@ export const Api = (props: apiProps) => {
           />
 
           <Card.Body>
-            <Button variant="dark" id={item.id} onClick={e => handleShow(e)}>{item.title}</Button>
+            <Button style={{backgroundColor: "#131516" }} className="p-0 border-0" id={item.id} onClick={e => handleShow(e)}>{item.title}</Button>
           </Card.Body>
         </Card>
       ))}

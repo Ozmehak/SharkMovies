@@ -9,9 +9,9 @@ function Login() {
     return (
         <div className="login">
 
-            {!user && <button className="login__btn login__google" onClick={signInWithGoogle}>
+            {!user && <Button variant="outline-info" className="login__btn login__google" onClick={signInWithGoogle}>
                 Login with Google
-            </button>}
+            </Button>}
 
             {user && <div>{user.displayName}<Button variant="outline-dark" onClick={logout}>LogOut</Button></div>}
 

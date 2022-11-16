@@ -43,12 +43,19 @@ const MovieDiv = styled.div`
   @media (max-width: 1440px) {
     margin: 20px 10% 20px;
   }
+  
+  
 `;
 
 const MovieTitle = styled.h3`
   background: black;
-  color: #278798;
+  border-radius: 5px;
+  color: #0dcaf0;
   font-size: 50px;
+  
+  @media (max-width: 769px) {
+    font-size: 35px;
+  }
 `;
 
 const CardDiv = styled.div`
@@ -59,5 +66,10 @@ const CardDiv = styled.div`
 
   @media (max-width: 1024px) {
     margin-bottom: 0;
+  }
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    
   }
 `;
