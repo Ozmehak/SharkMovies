@@ -35,7 +35,7 @@ export const Home = () => {
 
     return (
         <>
-            {consent === true || localStorage.getItem('enough') !== "yes" &&<Login />}
+            {consent === true && localStorage.getItem('enough') !== "yes" &&<Login />}
 
     {display && (
         <CookieDiv>

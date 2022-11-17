@@ -4,6 +4,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import Button from "react-bootstrap/Button";
 import {useCookies} from "react-cookie";
 import LogRocket from "logrocket";
+import styled from "styled-components";
 
 
 function Login() {
@@ -55,9 +56,16 @@ return (
             Login with Google
         </Button>}
 
-        {user && <div>{user.displayName}<Button variant="outline-dark" onClick={cookieCruncher}>LogOut</Button></div>}
+        {user && <DisplayNameDiv>{user.displayName}<Button style={{marginLeft: "1rem"}} variant="outline-info" onClick={cookieCruncher}>LogOut</Button></DisplayNameDiv>}
 
     </div>
 )
 }
 export default Login;
+
+const DisplayNameDiv = styled.div `
+    color: #0dcaf0;
+  margin-left: 1rem;
+
+  border-color: #0dcaf0;
+`

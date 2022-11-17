@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 
 
+
 type singleProps = {
     json?: any;
     title?: string;
@@ -26,6 +27,7 @@ type singleProps = {
     credits?: any
     profile_path?: string
     name?: string
+    male?: any
 
 
 };
@@ -56,11 +58,14 @@ export const GetSingle = (props: singleProps) => {
                 <Modal.Body className="show-grid" style={{backgroundColor: "#131516", color: "#fff"}}>
                     <Container>
                         <Row>
-                            <Col><Img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}/></Col>
+                            {movie.backdrop_path ? <Col><Img src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}/></Col>
+                            : <Col><Img src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg`}/></Col>}
                             <Col>
                                 <StyledRow>Title: {movie.title}</StyledRow>
-                                <StyledRow>Budget: ${movie.budget}</StyledRow>
-                                <StyledRow>Revenue: ${movie.revenue}</StyledRow>
+                                { movie.budget  ? <StyledRow>Budget: ${movie.budget}</StyledRow>
+                                                : <StyledRow>Budget: N/A</StyledRow>}
+                                { movie.revenue  ? <StyledRow>Revenue: ${movie.revenue}</StyledRow>
+                                    : <StyledRow>Revenue: N/A</StyledRow>}
                                 <StyledRow>Release Date: {movie.release_date}</StyledRow>
                                 <StyledRow>Runtime: {movie.runtime} minutes</StyledRow>
                                 <StyledRow>Rating: {movie.vote_average}</StyledRow>
@@ -76,10 +81,10 @@ export const GetSingle = (props: singleProps) => {
                             {cast.slice(0, 5).map((person: singleProps) => (
                                 <Card key={person.id}
                                       style={{width: "9rem", backgroundColor: "#131516"}}>
-                                    <Card.Img
-                                        variant="top"
-                                        src={`https://image.tmdb.org/t/p/original${person.profile_path}`}
+                                    { person.profile_path ? <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
                                     />
+                                    : <Card.Img style={{width: 118, height: 177}} variant="top" src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg `}/>
+                                    }
                                     <StyledCardTitle>{person.name}</StyledCardTitle>
                                 </Card>))}
                         </Row>

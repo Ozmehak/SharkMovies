@@ -48,7 +48,7 @@ export const Api = (props: apiProps) => {
           style={{ width: "10rem", backgroundColor: "#131516" }}>
           <Card.Img
             variant="top"
-            src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
           />
 
           <Card.Body>
