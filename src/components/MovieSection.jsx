@@ -5,13 +5,13 @@ export default function MovieSection() {
   return (
     <>
       <MovieDiv>
-        <MovieTitle>Coming out this December</MovieTitle>
+        <MovieTitle>Releases in December</MovieTitle>
         <CardDiv>
           <GetLists category="8228183"/>
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
-        <MovieTitle>Recommended Movies</MovieTitle>
+        <MovieTitle>Unforgettable Movies</MovieTitle>
         <CardDiv>
           <GetLists category="8227557" />
         </CardDiv>

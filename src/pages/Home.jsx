@@ -1,64 +1,55 @@
 import {ImageCarousel} from "../components/ImageCarousel";
 import MovieSection from "../components/MovieSection";
-import {useCookies} from "react-cookie";
 import {useEffect, useState} from "react";
-
 import styled from "styled-components";
-import LogRocket from "logrocket";
 import Login from "../components/Login";
-import {useAuthState} from "react-firebase-hooks/auth";
-import {auth} from "../firebase";
 
 
 export const Home = () => {
+    const setLocalEnough = () => {
+        localStorage.setItem("enough", "yes")
+        setDisplay(false)
+    }
 
-    const [user] = useAuthState(auth);
-    const [cookies, setCookie] = useCookies(["name"]);
     const [display, setDisplay] = useState(false);
-
+    const [consent, setConsent] = useState(false)
 
 
     useEffect(() => {
-        if (!Object.keys(cookies).includes("cookie-from-hell")) {
+        if(localStorage.getItem('enough') === "yes") {
+            setDisplay(false)
+        }
+
+        else if (consent !== true) {
             setDisplay(true);
         }
-    }, [cookies]);
+        else {
+            setDisplay(false)
+        }
 
-    function acceptCookie() {
-      LogRocket.init("znathy/mango-tree");
+    }, [consent]);
 
-        let expireDate = new Date();
-        expireDate.setTime(expireDate.getTime() + 1 * 3600 * 1000);
 
-        setCookie("cookie-from-hell", `${user.email}`, {
-            expires: expireDate,
-            httpOnly: false,
-            path: "/",
-            secure: true,
-        });
-        setDisplay(false);
-    }
 
 
 
     return (
         <>
-            <Login />
+            {consent === true && localStorage.getItem('enough') !== "yes" &&<Login />}
 
     {display && (
         <CookieDiv>
             <CookieMessage>
                 Allow the use of cookies from SharkMovies in this browser?
                 <CookieMsgSmall>
-              We collect cookies to deliver better user experience! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Deleniti minima nam
-              molestias, quisquam quos sit suscipit ipsum quidem, porro libero
-              veniam. Ipsam cupiditate exercitationem ex fugiat, est error dolor
-              delectus!
+              We collect cookies to deliver a better user experience!
+                    Logging in will not be possible if you decline.
+                    We all prefer real cookies but it is what it is. Enjoy!
             </CookieMsgSmall>
             </CookieMessage>
             <DeclineBtn onClick={(e) => setDisplay(false)}>Decline</DeclineBtn>
-            <AcceptBtn onClick={acceptCookie}>Allow cookies</AcceptBtn>
+            <AcceptBtn onClick={(c) => setConsent(true)}>Allow cookies</AcceptBtn>
+            <EnoughBtn onClick={setLocalEnough}>Enough with this shit</EnoughBtn>
         </CookieDiv>
     )}
     <ImageCarousel />
@@ -76,7 +67,15 @@ const AcceptBtn = styled.button`
     
   }
 `;
-
+const EnoughBtn = styled.button`
+  background-color: #131516;
+  margin-left: 25px;
+  color: darkgrey;
+  :hover {
+    font-weight: bold;
+    
+  }
+`;
 const CookieMsgSmall = styled.p`
   font-size: 15px;
   margin: 15px 25px 0;

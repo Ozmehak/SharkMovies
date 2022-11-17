@@ -48,10 +48,10 @@ export const GetLists = (props: listProps) => {
                   >
           <StyledCardImage
             variant="top"
-            src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
           />
           <StyledCardBody>
-            <Button style={{backgroundColor: "#131516" }} className="p-0 border-0" id={item.id} onClick={e => handleShow(e)}>{item.title}
+            <Button style={{backgroundColor: "#131516" , width: "10rem"}} className="p-0 border-0" id={item.id} onClick={e => handleShow(e)}>{item.title}
 
             </Button>
           </StyledCardBody>
