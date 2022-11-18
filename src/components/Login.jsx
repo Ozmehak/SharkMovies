@@ -19,13 +19,6 @@ function Login() {
 
  }, [user])
 
-
-
-
-
-
-
-
     const cookieMaster = () => {
         signInWithGoogle()
         LogRocket.init("znathy/mango-tree");
@@ -37,17 +30,12 @@ function Login() {
             path: "/",
             secure: true,
         });
-
     }
 
     const cookieCruncher = () => {
         removeCookie("cookie-from-hell")
         logout()
     }
-
-
-
-
 
 return (
     <div className="login">

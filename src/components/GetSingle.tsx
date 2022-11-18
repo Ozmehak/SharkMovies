@@ -4,8 +4,6 @@ import {Col, Container, Modal, Row, Tab, Tabs} from "react-bootstrap";
 import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 
-
-
 type singleProps = {
     json?: any;
     title?: string;
@@ -28,10 +26,7 @@ type singleProps = {
     profile_path?: string
     name?: string
     male?: any
-
-
 };
-
 
 export const GetSingle = (props: singleProps) => {
 

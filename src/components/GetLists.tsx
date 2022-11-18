@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import {MovieInfo} from "./MovieInfo";
 import {Button, Modal} from "react-bootstrap";
 import styled from "styled-components";
+import {GetSingle} from "./GetSingle";
 
 type listProps = {
   poster_path: string;
@@ -11,7 +11,7 @@ type listProps = {
   item: object;
   category: string;
   id?: any;
-
+  e: any;
 };
 
 export const GetLists = (props: listProps) => {
@@ -24,11 +24,6 @@ export const GetLists = (props: listProps) => {
     setShow(true);
     setMovieId(e.target.id)
   }
-
-
-
-
-
 
   useEffect(() => {
     axios
@@ -45,21 +40,20 @@ export const GetLists = (props: listProps) => {
       {listContent.map((item) => (
         <StyledCard
           key={item.id}
-                  >
+          id={item.id}
+          onClick={handleShow}>
           <StyledCardImage
             variant="top"
             src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
           />
           <StyledCardBody>
-            <Button style={{backgroundColor: "#131516" , width: "10rem"}} className="p-0 border-0" id={item.id} onClick={e => handleShow(e)}>{item.title}
-
-            </Button>
+            <p style={{backgroundColor: "#131516" , width: "10rem"}} className="p-0 border-0" id={item.id}>{item.title}</p>
           </StyledCardBody>
         </StyledCard>
       ))}
       <Modal show={show} onHide={handleClose} animation={false} size="lg" centered>
 
-        <MovieInfo id={movieId}/>
+        <GetSingle id={movieId}/>
       </Modal>
     </>
   );
