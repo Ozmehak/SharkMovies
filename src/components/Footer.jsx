@@ -52,6 +52,10 @@ border-top: 1px solid #fff;
   padding-top: 25px;
   align-items: center;
   color: #fff;
+  
+  @media(max-width: 650px) {
+    flex-direction: column;
+  }
 `
 
 const Copy = styled.p`
@@ -67,6 +71,10 @@ justify-content: center;
 height: 3rem;
 margin: auto;
 padding: 0 40px 0 40px;
+
+  @media(max-width: 650px) {
+    margin-bottom: 2rem;
+  }
 `
 
 const IconContainer = styled.div`
@@ -74,11 +82,20 @@ display: flex;
 justify-content: space-between;
 padding: 0 25px 0 15px;
 width: 400px;
+
+  @media(max-width: 450px) {
+    max-width: 300px;
+  }
 `
 
 const Links = styled.div`
 display: flex;
 width: 400px;
+  
+  @media(max-width: 650px) {
+    margin-bottom: 2rem;
+    max-width: 300px;
+  }
 `
 const Paragraph = styled.p`
 display: flex;
