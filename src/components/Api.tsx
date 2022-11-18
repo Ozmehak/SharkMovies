@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import {MovieInfo} from "./MovieInfo"
 import {Button, Modal} from "react-bootstrap";
+import {GetSingle} from "./GetSingle";
 type apiProps = {
   json?: any;
   title?: string;
@@ -13,9 +13,6 @@ type apiProps = {
   id?: any
 
 };
-
-
-
 
 export const Api = (props: apiProps) => {
   const [content, setContent] = useState<apiProps[]>([]);
@@ -28,8 +25,6 @@ export const Api = (props: apiProps) => {
     setShow(true);
     setMovieId(e.target.id)
   }
-
-
 
   useEffect(() => {
     axios
@@ -57,8 +52,8 @@ export const Api = (props: apiProps) => {
         </Card>
       ))}
       <Modal show={show} onHide={handleClose} animation={false} size="lg" centered>
-
-        <MovieInfo id={movieId}/>
+        <GetSingle id={movieId} />
+        {/*<MovieInfo id={movieId}/>*/}
       </Modal>
     </>
   );
