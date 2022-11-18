@@ -1,12 +1,29 @@
 import { Api } from "../components/Api";
+import styled from "styled-components";
 
 export const Popular = () => {
   return (
-    <div style={{backgroundColor: "#131516"}}>
-      <h1 style={{ color:"#0dcaf0", textAlign: "center", margin: "3rem 0"}}>Popular Movies</h1>
-      <div style={{ height: "54rem", display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
+    <Container>
+      <Title>Popular Movies</Title>
+      <ContentContainer>
         <Api category="popular" />
-      </div>
-    </div>
+      </ContentContainer>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  background-color: #131516;
+`
+
+const Title = styled.h1`
+  color: #0dcaf0;
+  text-align: center;
+  margin: 3rem 0;
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`

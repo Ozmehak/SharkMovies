@@ -29,10 +29,6 @@ export const Home = () => {
 
     }, [consent]);
 
-
-
-
-
     return (
         <>
             {consent === true && localStorage.getItem('enough') !== "yes" &&<Login />}
