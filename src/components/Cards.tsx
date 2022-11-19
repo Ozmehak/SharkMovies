@@ -33,7 +33,7 @@ export const Cards = (props: CardsProps) => {
             src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
           />
 
-          <Card.Body> {item.title}</Card.Body>
+          <StyledP> {item.title}</StyledP>
         </StyledCard>
       ))}
     </>
@@ -46,10 +46,25 @@ const StyledCardImg = styled(Card.Img)`
 `
 const StyledCard = styled(Card)`
   width: 10rem;
+  border-style: solid;
+  border-color: red;
   background-color: #131516;
   cursor: pointer;
 
   @media (max-width: 769px) {
-    width: 5rem;
+    width: 7rem;
+    margin-bottom: 1rem;
+  }
+`
+const StyledP = styled.p`
+  color: #fff;
+  @media (max-width: 769px) {
+    font-size: small;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    height: 2rem;
+    margin: 1rem 1rem 1rem 1rem;
   }
 `
