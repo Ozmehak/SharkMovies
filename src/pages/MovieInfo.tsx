@@ -1,4 +1,5 @@
 import { useParams } from 'react-router'
+import { GetSingle } from '../components/GetSingle'
 
 interface Props {
   movieId: string | number
@@ -7,5 +8,5 @@ interface Props {
 export const MovieInfo = () => {
   let { movieId } = useParams()
 
-  return <div>{movieId}</div>
+  return <GetSingle id={movieId} />
 }

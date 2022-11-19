@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react'
-import axios from 'axios'
 import { Cards } from './Cards'
 
 export const apiContext = createContext<apiProps | null>(null)

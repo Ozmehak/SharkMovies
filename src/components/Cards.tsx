@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { apiContext } from './Api'
 import Card from 'react-bootstrap/Card'
 import { Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 interface CardsProps {
   json?: any
@@ -14,8 +15,12 @@ interface CardsProps {
 }
 
 export const Cards = () => {
+  const navigate = useNavigate()
   const contextFromApi = useContext(apiContext)
-
+  const navigateId = (e: any) => {
+    // 👇️ navigate to /
+    navigate(`/${e.target.id}`)
+  }
   return (
     <>
       {' '}
@@ -34,6 +39,7 @@ export const Cards = () => {
               style={{ backgroundColor: '#131516' }}
               className='p-0 border-0'
               id={item.id}
+              onClick={(e) => navigateId(e)}
             >
               {' '}
               {item.title}

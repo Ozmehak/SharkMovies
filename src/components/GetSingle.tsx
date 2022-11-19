@@ -33,13 +33,13 @@ export const GetSingle = (props: singleProps) => {
   const [cast, setCast] = useState<singleProps[]>([])
 
   useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}${props.id}?api_key=${process.env.REACT_APP_API_KEY}&&append_to_response=credits`
-      )
+    fetch(
+      `${process.env.REACT_APP_API_URL}${props.id}?api_key=${process.env.REACT_APP_API_KEY}&&append_to_response=credits`
+    )
+      .then((response) => response.json())
       .then((response) => {
-        setMovie(response.data)
-        setCast(response.data.credits.cast)
+        setMovie(response)
+        setCast(response.credits.cast)
       })
   }, [props.id])
 
