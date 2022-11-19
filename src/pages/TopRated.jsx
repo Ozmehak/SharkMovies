@@ -1,12 +1,12 @@
-import { Api } from "../components/Api";
-import styled from "styled-components";
+import { Api } from '../components/Api'
+import styled from 'styled-components'
 
 export const TopRated = () => {
   return (
     <Container>
-        <Title>Top Rated Movies</Title>
+      <Title>Top Rated Movies</Title>
       <ContentContainer>
-        <Api category="top_rated" />
+        <Api category='top_rated' />
       </ContentContainer>
     </Container>
   )

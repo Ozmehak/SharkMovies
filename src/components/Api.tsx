@@ -1,65 +1,48 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Card from "react-bootstrap/Card";
-import {MovieInfo} from "./MovieInfo"
-import {Button, Modal} from "react-bootstrap";
+import React, { createContext, useEffect, useState } from 'react'
+import { Cards } from './Cards'
+
+export const apiContext = createContext<apiProps | null>(null)
+
 type apiProps = {
-  json?: any;
-  title?: string;
-  item?: object;
-  poster_path?: object;
-  src?: string;
-  category: string;
+  json?: any
+  title?: string
+  item?: object
+  poster_path?: object
+  src?: string
+  category?: string
   id?: any
-
-};
-
-
-
+  apiContext?: any
+  contextFromApi?: any
+  content?: Array<any>
+  movieId?: string
+}
 
 export const Api = (props: apiProps) => {
-  const [content, setContent] = useState<apiProps[]>([]);
-
-  const [show, setShow] = useState(false);
+  const [content, setContent] = useState<apiProps[]>([])
   const [movieId, setMovieId] = useState(undefined)
 
-  const handleClose = () => setShow(false);
   const handleShow = (e: any) => {
-    setShow(true);
     setMovieId(e.target.id)
   }
-
-
-
   useEffect(() => {
-    axios
-      .get(
+    if (props.category) {
+      fetch(
         `${process.env.REACT_APP_API_URL}${props.category}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
       )
-      .then((response) => {
-        setContent(response.data.results);
-      });
-  }, [props.category]);
+        .then((response) => response.json())
+        .then((response) => setContent(response.results))
+    } else if (props.movieId) {
+      fetch(
+        `${process.env.REACT_APP_API_URL_LISTS}${props.movieId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+      )
+        .then((response) => response.json())
+        .then((response) => setContent(response.items))
+    }
+  }, [props.category, props.movieId])
 
   return (
-    <>
-      {content.map((item) => (
-        <Card key={item.id}
-          style={{ width: "10rem", backgroundColor: "#131516" }}>
-          <Card.Img
-            variant="top"
-            src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-          />
-
-          <Card.Body>
-            <Button style={{backgroundColor: "#131516" }} className="p-0 border-0" id={item.id} onClick={e => handleShow(e)}>{item.title}</Button>
-          </Card.Body>
-        </Card>
-      ))}
-      <Modal show={show} onHide={handleClose} animation={false} size="lg" centered>
-
-        <MovieInfo id={movieId}/>
-      </Modal>
-    </>
-  );
-};
+    <apiContext.Provider value={{ content }}>
+      <Cards />
+    </apiContext.Provider>
+  )
+}

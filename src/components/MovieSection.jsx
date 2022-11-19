@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { GetLists } from "./GetLists";
+import styled from 'styled-components'
+import { Api } from './Api'
 
 export default function MovieSection() {
   return (
@@ -7,29 +7,29 @@ export default function MovieSection() {
       <MovieDiv>
         <MovieTitle>Releases in December</MovieTitle>
         <CardDiv>
-          <GetLists category="8228183"/>
+          <Api movieId='8228183' />
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
         <MovieTitle>Unforgettable Movies</MovieTitle>
         <CardDiv>
-          <GetLists category="8227557" />
+          <Api movieId='8227557' />
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
         <MovieTitle>Underrated Movies</MovieTitle>
         <CardDiv>
-          <GetLists category="8227655" />
+          <Api movieId='8227655' />
         </CardDiv>
       </MovieDiv>
       <MovieDiv>
         <MovieTitle>Disturbing Movies</MovieTitle>
         <CardDiv>
-          <GetLists category="8227656" />
+          <Api movieId='8227656' />
         </CardDiv>
       </MovieDiv>
     </>
-  );
+  )
 }
 
 const MovieDiv = styled.div`
@@ -43,20 +43,18 @@ const MovieDiv = styled.div`
   @media (max-width: 1440px) {
     margin: 20px 10% 20px;
   }
-  
-  
-`;
+`
 
 const MovieTitle = styled.h3`
   background: black;
   border-radius: 5px;
   color: #0dcaf0;
   font-size: 50px;
-  
+
   @media (max-width: 769px) {
     font-size: 35px;
   }
-`;
+`
 
 const CardDiv = styled.div`
   display: flex;
@@ -70,6 +68,5 @@ const CardDiv = styled.div`
 
   @media (max-width: 769px) {
     flex-direction: column;
-    
   }
-`;
+`
