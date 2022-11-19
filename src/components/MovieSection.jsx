@@ -22,6 +22,7 @@ export default function MovieSection() {
           <Api movieId='8227655' />
         </CardDiv>
       </MovieDiv>
+
       <MovieDiv>
         <MovieTitle>Disturbing Movies</MovieTitle>
         <CardDiv>
@@ -42,6 +43,9 @@ const MovieDiv = styled.div`
 
   @media (max-width: 1440px) {
     margin: 20px 10% 20px;
+  }
+  @media (max-width: 769px) {
+    margin: 0;
   }
 `
 
@@ -67,6 +71,6 @@ const CardDiv = styled.div`
   }
 
   @media (max-width: 769px) {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 `

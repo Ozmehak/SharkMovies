@@ -27,8 +27,9 @@ function NavBar() {
     >
       <Container fluid>
         <Navbar.Toggle aria-controls='navbarScroll' className='p-0 px-2' />
-        <img alt='logo' src={sharkLogo} />
+
         <Navbar.Brand href='/' style={{ color: '#CCC9C3' }}>
+          <img alt='logo' src={sharkLogo} />
           SharkMovies
         </Navbar.Brand>
 
