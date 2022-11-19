@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Col, Container, Modal, Row, Tab, Tabs } from 'react-bootstrap'
 import styled from 'styled-components'
 import Card from 'react-bootstrap/Card'
