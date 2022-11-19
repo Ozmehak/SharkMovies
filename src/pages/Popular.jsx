@@ -1,12 +1,12 @@
-import { Api } from "../components/Api";
-import styled from "styled-components";
+import { Api } from '../components/Api'
+import styled from 'styled-components'
 
 export const Popular = () => {
   return (
     <Container>
       <Title>Popular Movies</Title>
       <ContentContainer>
-        <Api category="popular" />
+        <Api category='popular' />
       </ContentContainer>
     </Container>
   )
