@@ -17,6 +17,8 @@ function App() {
           <Route exact path='/popular' element={<Popular />} />
           <Route exact path='/toprated' element={<TopRated />} />
           <Route exact path='/:movieId' element={<MovieInfo />} />
+          <Route exact path='popular/:movieId' element={<MovieInfo />} />
+          <Route exact path='toprated/:movieId' element={<MovieInfo />} />
         </Routes>
       </Router>
       <Footer />

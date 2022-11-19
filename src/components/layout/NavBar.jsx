@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
 import React from 'react'
+import { Navigate } from 'react-router'
 
 function NavBar() {
   const cld = new Cloudinary({

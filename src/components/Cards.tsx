@@ -3,6 +3,7 @@ import { apiContext } from './Api'
 import Card from 'react-bootstrap/Card'
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router'
 
 interface CardsProps {
   json?: any
@@ -14,12 +15,11 @@ interface CardsProps {
   id?: any
 }
 
-export const Cards = () => {
+export const Cards = (props: CardsProps) => {
   const navigate = useNavigate()
   const contextFromApi = useContext(apiContext)
   const navigateId = (e: any) => {
-    // 👇️ navigate to /
-    navigate(`/${e.target.id}`)
+    navigate(`${e.target.id}`)
   }
   return (
     <>
