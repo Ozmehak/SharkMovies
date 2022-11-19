@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { apiContext } from './Api'
 import Card from 'react-bootstrap/Card'
-import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router'
+import styled from 'styled-components'
 
 interface CardsProps {
   json?: any
@@ -19,34 +18,38 @@ export const Cards = (props: CardsProps) => {
   const navigate = useNavigate()
   const contextFromApi = useContext(apiContext)
   const navigateId = (e: any) => {
-    navigate(`${e.target.id}`)
+    navigate(`${e.currentTarget.id}`)
   }
   return (
     <>
-      {' '}
       {contextFromApi?.content?.map((item) => (
-        <Card
+        <StyledCard
           key={item.id}
-          style={{ width: '10rem', backgroundColor: '#131516' }}
+          id={item.id}
+          onClick={(e: MouseEvent) => navigateId(e)}
         >
-          <Card.Img
+          <StyledCardImg
             variant='top'
             src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
           />
 
-          <Card.Body>
-            <Button
-              style={{ backgroundColor: '#131516' }}
-              className='p-0 border-0'
-              id={item.id}
-              onClick={(e) => navigateId(e)}
-            >
-              {' '}
-              {item.title}
-            </Button>
-          </Card.Body>
-        </Card>
+          <Card.Body> {item.title}</Card.Body>
+        </StyledCard>
       ))}
     </>
   )
 }
+
+const StyledCardImg = styled(Card.Img)`
+  @media (max-width: 769px) {
+  }
+`
+const StyledCard = styled(Card)`
+  width: 10rem;
+  background-color: #131516;
+  cursor: pointer;
+
+  @media (max-width: 769px) {
+    width: 5rem;
+  }
+`
