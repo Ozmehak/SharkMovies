@@ -19,11 +19,7 @@ type apiProps = {
 
 export const Api = (props: apiProps) => {
   const [content, setContent] = useState<apiProps[]>([])
-  const [movieId, setMovieId] = useState(undefined)
 
-  const handleShow = (e: any) => {
-    setMovieId(e.target.id)
-  }
   useEffect(() => {
     if (props.category) {
       fetch(
