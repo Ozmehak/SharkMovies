@@ -6,18 +6,32 @@ import Navbar from 'react-bootstrap/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Navigate } from 'react-router'
 
 function NavBar() {
+  const [searchContent, setSearchContent] = useState([])
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dvvauf785',
     },
   })
 
+  useEffect(() => {
+
+    fetch(
+        `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=batman`
+    )
+        .then((response) => response.json())
+        .then((response) => setSearchContent(response.results))
+  }, [])
+
   const logoImage1 = cld.image('sharkLogoSM_c2zffk')
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
+
+  const handleSearch = (e) => {
+    setSearchContent(e.target.value)
+  }
 
   return (
     <Navbar
@@ -41,7 +55,7 @@ function NavBar() {
             <Nav.Link href='/popular'>Popular</Nav.Link>
             <Nav.Link href='/toprated'>Top Rated</Nav.Link>
           </Nav>
-          <Form className='d-flex'>
+          <Form className='d-flex flex-column'>
             <Form.Control
               style={{
                 backgroundColor: 'rgba(19, 21, 22, 0.1)',
@@ -52,8 +66,17 @@ function NavBar() {
               placeholder='Search'
               className='me-2'
               aria-label='Search'
+              onChange={handleSearch}
             />
-            <Button variant='outline-info'>Search</Button>
+            <Button variant='outline-info' style={{marginTop: "1rem", marginBottom: "1rem"}}>Search</Button>
+            {searchContent.map(item => (
+                <div key={item.id}>
+                  <p>{item.title}</p>
+                  {/*<img src={item.poster_path} alt="image"/>*/}
+                </div>
+            ))
+            }
+
           </Form>
         </Navbar.Collapse>
       </Container>
