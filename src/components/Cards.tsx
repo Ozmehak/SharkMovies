@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { apiContext } from './Api'
 import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
@@ -46,8 +46,6 @@ const StyledCardImg = styled(Card.Img)`
 `
 const StyledCard = styled(Card)`
   width: 10rem;
-  border-style: solid;
-  border-color: red;
   background-color: #131516;
   cursor: pointer;
 
