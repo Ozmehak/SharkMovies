@@ -9,8 +9,8 @@ import { fit } from '@cloudinary/url-gen/actions/resize'
 import React, {useEffect, useState} from 'react'
 
 function NavBar() {
-  const [searchContent, setSearchContent] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchContent, setSearchContent] = useState([])
 
   const cld = new Cloudinary({
     cloud: {
@@ -25,7 +25,7 @@ function NavBar() {
   )
       .then((response) => response.json())
       .then((response) => setSearchContent(response.results))
-  }
+  } 
     
   }, [searchQuery])
 
@@ -33,9 +33,11 @@ function NavBar() {
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
 
   const handleSearch = (e) => {
-    
-    setSearchContent()
-  
+    setSearchQuery(e.target.value)
+  }
+
+  const handleClick = () => {
+    setSearchContent(searchQuery)
   }
   
   return (
@@ -71,9 +73,11 @@ function NavBar() {
               placeholder='Search'
               className='me-2'
               aria-label='Search'
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearch}
+              value={searchQuery}
             />
-            <Button variant='outline-info' style={{marginTop: "1rem", marginBottom: "1rem"}} onClick={handleSearch}>Search</Button>
+
+            <Button variant='outline-info' style={{marginTop: "1rem", marginBottom: "1rem"}} onClick={handleClick}>Search</Button>
             {searchQuery ?
             searchContent.map((item) => (
                 <div key={item.id}>
