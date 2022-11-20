@@ -7,10 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
 import React, {useEffect, useState} from 'react'
-import { Navigate } from 'react-router'
 
 function NavBar() {
   const [searchContent, setSearchContent] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dvvauf785',
@@ -18,21 +19,25 @@ function NavBar() {
   })
 
   useEffect(() => {
-
+  if(searchQuery){
     fetch(
-        `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=batman`
-    )
-        .then((response) => response.json())
-        .then((response) => setSearchContent(response.results))
-  }, [])
+      `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchQuery}`
+  )
+      .then((response) => response.json())
+      .then((response) => setSearchContent(response.results))
+  }
+    
+  }, [searchQuery])
 
   const logoImage1 = cld.image('sharkLogoSM_c2zffk')
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
 
   const handleSearch = (e) => {
-    setSearchContent(e.target.value)
+    
+    setSearchContent()
+  
   }
-
+  
   return (
     <Navbar
       className='navbar navbar-dark bg-dark border-bottom border-light'
@@ -41,9 +46,8 @@ function NavBar() {
     >
       <Container fluid>
         <Navbar.Toggle aria-controls='navbarScroll' className='p-0 px-2' />
-
+        <img alt='logo' src={sharkLogo} />
         <Navbar.Brand href='/' style={{ color: '#CCC9C3' }}>
-          <img alt='logo' src={sharkLogo} />
           SharkMovies
         </Navbar.Brand>
 
@@ -67,16 +71,17 @@ function NavBar() {
               placeholder='Search'
               className='me-2'
               aria-label='Search'
-              onChange={handleSearch}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <Button variant='outline-info' style={{marginTop: "1rem", marginBottom: "1rem"}}>Search</Button>
-            {searchContent.map(item => (
+            <Button variant='outline-info' style={{marginTop: "1rem", marginBottom: "1rem"}} onClick={handleSearch}>Search</Button>
+            {searchQuery ?
+            searchContent.map((item) => (
                 <div key={item.id}>
                   <p>{item.title}</p>
-                  {/*<img src={item.poster_path} alt="image"/>*/}
+                  <img src={`https://image.tmdb.org/t/p/w185${item.poster_path}`} alt="posters" style={{width: "50px", height: '70px'}}/>
                 </div>
             ))
-            }
+            : ''}
 
           </Form>
         </Navbar.Collapse>
