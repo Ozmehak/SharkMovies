@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Modal, Row, Tab, Tabs } from 'react-bootstrap'
+import { Container, Modal, Row, Tab, Tabs } from 'react-bootstrap'
 import styled from 'styled-components'
 import Card from 'react-bootstrap/Card'
 
@@ -52,60 +52,70 @@ export const GetSingle = (props: singleProps) => {
           <Container>
             <Row>
               {movie.backdrop_path ? (
-                <Col>
-                  <Img
-                    src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}
-                  />
-                </Col>
+                <Img
+                  src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}
+                />
               ) : (
-                <Col>
-                  <Img
-                    src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg`}
-                  />
-                </Col>
+                <Img
+                  src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg`}
+                />
               )}
-              <Col>
-                <StyledRow>Title: {movie.title}</StyledRow>
-                {movie.budget ? (
-                  <StyledRow>Budget: ${movie.budget}</StyledRow>
-                ) : (
-                  <StyledRow>Budget: N/A</StyledRow>
-                )}
-                {movie.revenue ? (
-                  <StyledRow>Revenue: ${movie.revenue}</StyledRow>
-                ) : (
-                  <StyledRow>Revenue: N/A</StyledRow>
-                )}
-                <StyledRow>Release Date: {movie.release_date}</StyledRow>
-                <StyledRow>Runtime: {movie.runtime} minutes</StyledRow>
-                <StyledRow>Rating: {movie.vote_average}</StyledRow>
-                <StyledRow>Votes: {movie.vote_count}</StyledRow>
-              </Col>
             </Row>
+            <StyledRow>
+              Title: <StyledSpan>{movie.title}</StyledSpan>
+            </StyledRow>
+            <StyledRow>
+              Budget:{' '}
+              <StyledSpan>
+                {movie.budget ? `$${movie.budget}` : 'N/A'}
+              </StyledSpan>
+            </StyledRow>
+
+            <StyledRow>
+              Revenue:{' '}
+              <StyledSpan>
+                {movie.revenue ? `$${movie.revenue}` : 'N/A'}
+              </StyledSpan>
+            </StyledRow>
+
+            <StyledRow>
+              Release Date: <StyledSpan>{movie.release_date}</StyledSpan>
+            </StyledRow>
+            <StyledRow>
+              Runtime: <StyledSpan>{movie.runtime} minutes</StyledSpan>
+            </StyledRow>
+            <StyledRow>
+              Rating:
+              <StyledSpan>
+                {movie.vote_average ? movie.vote_average : 'N/A'}
+              </StyledSpan>
+            </StyledRow>
+            <StyledRow>
+              Votes:
+              <StyledSpan>
+                {movie.vote_count ? movie.vote_count : 'N/A'}
+              </StyledSpan>
+            </StyledRow>
             <OverviewRow>{movie.overview}</OverviewRow>
             <CastRow>Top Billed Cast</CastRow>
-            <Row>
-              {cast.slice(0, 5).map((person: singleProps) => (
-                <Card
-                  key={person.id}
-                  style={{ width: '9rem', backgroundColor: '#131516' }}
-                >
+            <AnotherCastRow>
+              {cast.slice(0, 8).map((person: singleProps) => (
+                <CastCard key={person.id}>
                   {person.profile_path ? (
-                    <Card.Img
+                    <CastImg
                       variant='top'
                       src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
                     />
                   ) : (
-                    <Card.Img
-                      style={{ width: 118, height: 177 }}
+                    <CastImg
                       variant='top'
                       src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg `}
                     />
                   )}
                   <StyledCardTitle>{person.name}</StyledCardTitle>
-                </Card>
+                </CastCard>
               ))}
-            </Row>
+            </AnotherCastRow>
           </Container>
         </Modal.Body>
       </Tab>
@@ -171,19 +181,52 @@ export const GetSingle = (props: singleProps) => {
 const Img = styled.img`
   width: 100%;
   border-radius: 5px;
+  opacity: 0.2;
+  margin-bottom: 1rem;
 `
 const StyledRow = styled(Row)`
   margin: 0.1rem;
+  font-weight: bold;
+`
+const StyledSpan = styled.span`
+  font-style: italic;
+  font-weight: normal;
+  width: 50%;
 `
 const CastRow = styled(Row)`
-  margin-left: 0.1rem;
+  margin-left: 0.5rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
 `
 const OverviewRow = styled(Row)`
   margin-left: 0.1rem;
   margin-top: 1rem;
+  font-style: italic;
+  width: 100%;
 `
 const StyledCardTitle = styled(Card.Title)`
   margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: small;
+`
+const CastImg = styled(Card.Img)`
+  width: 10rem;
+  @media (max-width: 769px) {
+    width: 5rem;
+  }
+`
+
+const CastCard = styled(Card)`
+  width: 10rem;
+  background-color: #131516;
+  font-size: small;
+  @media (max-width: 769px) {
+    padding: 0 0 0 5px;
+    width: 5rem;
+    background-color: #131516;
+  }
+`
+const AnotherCastRow = styled(Row)`
+  @media (max-width: 769px) {
+    padding: 0 0 0 1rem;
 `
