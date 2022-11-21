@@ -36,7 +36,6 @@ function NavBar() {
   const handleSearch = (e) => {
     let value = e.target.value.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')
     value.trim()
-    console.log(value)
     setSearchQuery(value)
   }
 
