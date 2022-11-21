@@ -34,6 +34,8 @@ function NavBar() {
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
 
   const handleSearch = (e) => {
+    let value = e.target.value.toLowerCase().trim().replace(/[^a-zA-Z0-9 ]/g, '')
+    
     setSearchQuery(e.target.value)
   }
 
