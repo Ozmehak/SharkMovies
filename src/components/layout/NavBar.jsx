@@ -7,8 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
 import React, { useEffect, useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../firebase'
 
 function NavBar() {
+  const [user] = useAuthState(auth)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchContent, setSearchContent] = useState([])
   const [clickt, handleClickt] = useState(null)
@@ -62,6 +65,7 @@ function NavBar() {
           >
             <Nav.Link href='/popular'>Popular</Nav.Link>
             <Nav.Link href='/toprated'>Top Rated</Nav.Link>
+            {user && <Nav.Link href='/watchlist'>WatchList</Nav.Link>}
           </Nav>
           <Form className='d-flex flex-column'>
             <Form.Control

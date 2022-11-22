@@ -12,6 +12,12 @@ import {
   collection,
   where,
   addDoc,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -53,4 +59,32 @@ const logout = () => {
   signOut(auth)
 }
 
-export { auth, db, signInWithGoogle, logout }
+const addToWatchlist = async (userId, movieId) => {
+  const docRef = doc(db, 'watchlist', `${userId}`)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    const watchlistRef = doc(db, 'watchlist', `${userId}`)
+    await updateDoc(watchlistRef, { id: arrayUnion(movieId) })
+  } else {
+    await setDoc(doc(db, 'watchlist', userId), {
+      id: [`${movieId}`],
+    })
+  }
+}
+
+const removeFromWatchlist = async (userId, movieId) => {
+  const watchlistRef = doc(db, 'watchlist', `${userId}`)
+  await updateDoc(watchlistRef, {
+    id: arrayRemove(movieId),
+  })
+}
+
+export {
+  auth,
+  db,
+  signInWithGoogle,
+  logout,
+  addToWatchlist,
+  removeFromWatchlist,
+}

@@ -5,6 +5,7 @@ import { Footer } from './components/layout/Footer'
 import { Popular } from './pages/Popular'
 import { TopRated } from './pages/TopRated'
 import { MovieInfo } from './pages/MovieInfo'
+import { WatchList } from './pages/WatchList'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/:movieId' element={<MovieInfo />} />
           <Route exact path='popular/:movieId' element={<MovieInfo />} />
           <Route exact path='toprated/:movieId' element={<MovieInfo />} />
+          <Route exact path='/watchlist' element={<WatchList />} />
         </Routes>
       </Router>
       <Footer />
