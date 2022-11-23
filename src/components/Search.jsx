@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Button, Form } from "react-bootstrap"
+import { useNavigate } from 'react-router-dom'
+import { SearchContext } from '../context/SearchContext';
 
 export const Search = () => {
-    const [searchQuery, setSearchQuery] = useState('')
-    const [searchContent, setSearchContent] = useState([])
-    const [clicked, setClicked] = useState(null)
+  const {searchQuery, setSearchQuery, setSearchContent, clicked, setClicked} = useContext(SearchContext)
 
+  
+    const navigate = useNavigate()
+
+    const navigateId = (e) => {
+    }
+   
     useEffect(() => {
     
         if (clicked > 0) {
@@ -15,8 +21,8 @@ export const Search = () => {
             .then((response) => response.json())
             .then((response) => setSearchContent(response.results))
         }
-      }, [clicked, searchQuery])
-    
+      }, [clicked, searchQuery, setSearchContent])
+       
       const handleSearch = (e) => {
         let value = e.target.value.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')
         value.trim()
@@ -25,6 +31,7 @@ export const Search = () => {
     
       const handleClick = () => {
         setClicked(1)
+        navigate('/searchcontent')
       }
 
     return (
@@ -51,18 +58,7 @@ export const Search = () => {
             >
               Search
             </Button>
-            {searchQuery
-              ? searchContent.map((item) => (
-                  <div key={item.id}>
-                    <p>{item.title}</p>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                      alt='posters'
-                      style={{ width: '50px', height: '70px' }}
-                    />
-                  </div>
-                ))
-              : ''}
+            
           </Form>
         </>
     )
