@@ -28,7 +28,7 @@ export const Footer = () => {
           <Paragraph>Help</Paragraph>
           <Paragraph>
             Sharks
-            <SuitHeartFill />
+            <SuitHeartFill color={'pink'} size={20} />
           </Paragraph>
         </Links>
         <Img alt='logo' src={tmdbLogo} />

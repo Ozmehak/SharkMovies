@@ -23,7 +23,6 @@ function NavBar() {
   })
 
   useEffect(() => {
-    console.log(searchQuery)
     if (clickt > 0) {
       fetch(
         `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchQuery}`
