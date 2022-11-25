@@ -15,7 +15,6 @@ function App() {
       <Header />
 
       <Routes>
-       
           <Route exact path='/' element={<Home />} />
           <Route exact path='/popular' element={<Popular />} />
           <Route exact path='/toprated' element={<TopRated />} />
@@ -24,7 +23,6 @@ function App() {
           <Route exact path='popular/:movieId' element={<MovieInfo />} />
           <Route exact path='toprated/:movieId' element={<MovieInfo />} />
           <Route exact path='searchcontent/:movieId' element={<MovieInfo />} />
-      
       </Routes>
       </SearchProvider>
       <Footer />
