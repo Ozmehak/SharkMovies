@@ -13,6 +13,10 @@ export const SearchContent = () => {
       navigate(`${e.currentTarget.id}`)
     }
 
+    if (searchContent === undefined) {
+        return <div></div>
+    }
+
     return (
         <>
             {searchQuery
@@ -22,7 +26,7 @@ export const SearchContent = () => {
                   id={item.id}
                   onClick={(e) => navigateId(e)}
                   >
-                    <MovieTitle>{item.title}</MovieTitle>
+                    <MovieTitle>{item.title || item.name}</MovieTitle>
                     <img
                       src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
                       alt='posters'
@@ -32,8 +36,7 @@ export const SearchContent = () => {
                 ))
               : ''}
         </>
-    )
-}
+    )}
 
 const SearchContentContainer = styled.div`
     display: flex;
@@ -44,6 +47,7 @@ const SearchContentContainer = styled.div`
 `
 const MovieTitle = styled.p`
     font-size: 1rem;
+    color: aliceblue;
 
     @media(min-width: 500px) {
         font-size: 1.5rem;
