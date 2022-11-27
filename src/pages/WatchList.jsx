@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../firebase'
+import { auth, showWatchList } from '../firebase'
 
 export const WatchList = () => {
   const [user] = useAuthState(auth)
+
+  showWatchList('yyhrN2I2sdX8of5ocrE0XAg88lm2')
 
   return (
     <Container>

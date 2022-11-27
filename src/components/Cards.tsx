@@ -37,7 +37,7 @@ export const Cards = (props: CardsProps) => {
 
             <StyledP> {item.title}</StyledP>
           </StyledCardBody>
-          <WatchListed />
+          <WatchListed movieId={item.id} />
         </StyledCard>
       ))}
     </>

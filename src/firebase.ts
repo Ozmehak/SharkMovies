@@ -30,7 +30,7 @@ const firebaseConfig = {
   measurementId: 'G-CGP4EW31M7',
 }
 
-const app = initializeApp(firebaseConfig)
+export const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
@@ -49,7 +49,7 @@ const signInWithGoogle = async () => {
         email: user.email,
       })
     }
-  } catch (err) {
+  } catch (err: any) {
     console.error(err)
     alert(err.message)
   }
@@ -59,25 +59,33 @@ const logout = () => {
   signOut(auth)
 }
 
-const addToWatchlist = async (userId, movieId) => {
+const addToWatchlist = async (userId: string, movieId: string) => {
   const docRef = doc(db, 'watchlist', `${userId}`)
   const docSnap = await getDoc(docRef)
-
   if (docSnap.exists()) {
-    const watchlistRef = doc(db, 'watchlist', `${userId}`)
-    await updateDoc(watchlistRef, { id: arrayUnion(movieId) })
+    await updateDoc(docRef, { watchlist: arrayUnion(`${movieId}`) })
   } else {
     await setDoc(doc(db, 'watchlist', userId), {
-      id: [`${movieId}`],
+      watchlist: [movieId],
     })
   }
 }
 
-const removeFromWatchlist = async (userId, movieId) => {
+const removeFromWatchlist = async (userId: string, movieId: string) => {
   const watchlistRef = doc(db, 'watchlist', `${userId}`)
   await updateDoc(watchlistRef, {
-    id: arrayRemove(movieId),
+    watchlist: arrayRemove(movieId),
   })
+}
+
+const showWatchList = async (userId: string) => {
+  const docRef = doc(db, 'watchlist', `${userId}`)
+  const docSnap = await getDoc(docRef)
+  if (docSnap.exists()) {
+    console.log(docSnap.data())
+  } else {
+    console.log('No such document!')
+  }
 }
 
 export {
@@ -87,4 +95,5 @@ export {
   logout,
   addToWatchlist,
   removeFromWatchlist,
+  showWatchList,
 }
