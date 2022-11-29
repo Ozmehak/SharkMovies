@@ -7,15 +7,15 @@ import { TopRated } from './pages/TopRated'
 import { MovieInfo } from './pages/MovieInfo'
 import { WatchList } from './pages/WatchList'
 import { SearchProvider } from './context/SearchContext'
-import { SearchContent } from './components/SearchContent';
+import { SearchContent } from './components/SearchContent'
 
 function App() {
   return (
     <div style={{ backgroundColor: '#131516' }}>
       <SearchProvider>
-      <Header />
+        <Header />
 
-      <Routes>
+        <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/popular' element={<Popular />} />
           <Route exact path='/toprated' element={<TopRated />} />
@@ -24,10 +24,8 @@ function App() {
           <Route exact path='popular/:movieId' element={<MovieInfo />} />
           <Route exact path='toprated/:movieId' element={<MovieInfo />} />
           <Route exact path='/watchlist' element={<WatchList />} />
-        </Routes>
-      </Router>
           <Route exact path='searchcontent/:movieId' element={<MovieInfo />} />
-      </Routes>
+        </Routes>
       </SearchProvider>
       <Footer />
     </div>

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Api } from './Api'
 import Button from 'react-bootstrap/Button'
-import { addToWatchlist, auth, removeFromWatchlist } from '../firebase'
+import { auth, removeFromWatchlist } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export default function MovieSection() {

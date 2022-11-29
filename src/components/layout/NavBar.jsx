@@ -4,36 +4,19 @@ import Navbar from 'react-bootstrap/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../firebase'
-
-function NavBar() {
-  const [user] = useAuthState(auth)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchContent, setSearchContent] = useState([])
-  const [clickt, handleClickt] = useState(null)
-
-import React from 'react'
 import { Search } from '../Search'
 
-function NavBar() {
+export const NavBar = () => {
+  const [user] = useAuthState(auth)
+
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dvvauf785',
     },
   })
-
-  useEffect(() => {
-    if (clickt > 0) {
-      fetch(
-        `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchQuery}`
-      )
-        .then((response) => response.json())
-        .then((response) => setSearchContent(response.results))
-    }
-  }, [clickt])
-
 
   const logoImage1 = cld.image('sharkLogoSM_c2zffk')
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
@@ -67,5 +50,3 @@ function NavBar() {
     </Navbar>
   )
 }
-
-export default NavBar
