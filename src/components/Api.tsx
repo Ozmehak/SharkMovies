@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { Cards } from './Cards'
 
-export const apiContext = createContext<apiProps | null>(null)
+export const ApiContext = createContext<apiProps | null>(null)
 
 type apiProps = {
   json?: any
@@ -15,9 +15,12 @@ type apiProps = {
   contextFromApi?: any
   content?: Array<any>
   movieId?: string
+  watchlisted?: boolean
+  setWatchlisted?: any
+  Argument?: boolean
 }
 
-export const Api = (props: apiProps) => {
+export const Api: React.FC = (props: apiProps) => {
   const [content, setContent] = useState<apiProps[]>([])
 
   useEffect(() => {
@@ -37,8 +40,8 @@ export const Api = (props: apiProps) => {
   }, [props.category, props.movieId])
 
   return (
-    <apiContext.Provider value={{ content }}>
+    <ApiContext.Provider value={{ content }}>
       <Cards />
-    </apiContext.Provider>
+    </ApiContext.Provider>
   )
 }

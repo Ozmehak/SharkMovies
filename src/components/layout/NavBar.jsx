@@ -4,6 +4,16 @@ import Navbar from 'react-bootstrap/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { fit } from '@cloudinary/url-gen/actions/resize'
+import React, { useEffect, useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../firebase'
+
+function NavBar() {
+  const [user] = useAuthState(auth)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchContent, setSearchContent] = useState([])
+  const [clickt, handleClickt] = useState(null)
+
 import React from 'react'
 import { Search } from '../Search'
 
@@ -13,6 +23,17 @@ function NavBar() {
       cloudName: 'dvvauf785',
     },
   })
+
+  useEffect(() => {
+    if (clickt > 0) {
+      fetch(
+        `${process.env.REACT_APP_API_URL_SEARCH}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchQuery}`
+      )
+        .then((response) => response.json())
+        .then((response) => setSearchContent(response.results))
+    }
+  }, [clickt])
+
 
   const logoImage1 = cld.image('sharkLogoSM_c2zffk')
   const sharkLogo = logoImage1.resize(fit().width(80).height(80)).toURL()
@@ -38,6 +59,7 @@ function NavBar() {
           >
             <Nav.Link href='/popular'>Popular</Nav.Link>
             <Nav.Link href='/toprated'>Top Rated</Nav.Link>
+            {user && <Nav.Link href='/watchlist'>WatchList</Nav.Link>}
           </Nav>
           <Search />
         </Navbar.Collapse>

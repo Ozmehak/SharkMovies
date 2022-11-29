@@ -1,19 +1,36 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Login from '../components/Login'
+import { ToggleButton } from 'react-bootstrap'
 
 export const Cookies = () => {
   const [display, setDisplay] = useState(false)
   const [consent, setConsent] = useState(false)
+  const [checked, setChecked] = useState(false)
 
-  const setLocalEnough = () => {
-    localStorage.setItem('enough', 'yes')
-    setDisplay(false)
-  }
-
-  useEffect(() => {
-    if (localStorage.getItem('enough') === 'yes') {
+  const handleConsent = (e) => {
+    if (checked && e.currentTarget.id === 'accept') {
+      localStorage.setItem('cookie', 'accepted')
       setDisplay(false)
+      setConsent(true)
+    } else if (checked && e.currentTarget.id === 'decline') {
+      localStorage.setItem('cookie', 'declined')
+      setDisplay(false)
+      setConsent(false)
+    } else if (!checked && e.currentTarget.id === 'accept') {
+      setConsent(true)
+    } else if (!checked && e.currentTarget.id === 'decline') {
+      setConsent(false)
+      setDisplay(false)
+    }
+  }
+  useEffect(() => {
+    if (localStorage.getItem('cookie') === 'accepted') {
+      setDisplay(false)
+      setConsent(true)
+    } else if (localStorage.getItem('cookie') === 'declined') {
+      setDisplay(false)
+      setConsent(false)
     } else if (consent !== true) {
       setDisplay(true)
     } else {
@@ -23,9 +40,7 @@ export const Cookies = () => {
 
   return (
     <>
-      {consent === true && localStorage.getItem('enough') !== 'yes' && (
-        <Login />
-      )}
+      {consent && <Login />}
 
       {display && (
         <CookieDiv>
@@ -37,9 +52,23 @@ export const Cookies = () => {
               but it is what it is. Enjoy!
             </CookieMsgSmall>
           </CookieMessage>
-          <DeclineBtn onClick={(e) => setDisplay(false)}>Decline</DeclineBtn>
-          <AcceptBtn onClick={(c) => setConsent(true)}>Allow cookies</AcceptBtn>
-          <EnoughBtn onClick={setLocalEnough}>Enough with this shit</EnoughBtn>
+          <DeclineBtn id='decline' onClick={(e) => handleConsent(e)}>
+            Decline
+          </DeclineBtn>
+          <AcceptBtn id='accept' onClick={(e) => handleConsent(e)}>
+            Allow cookies
+          </AcceptBtn>
+
+          <ToggleButton
+            type={'checkbox'}
+            value={1}
+            checked={checked}
+            onChange={(e) => setChecked(e.currentTarget.checked)}
+            variant={'outline-info'}
+            id={'toggle-check'}
+          >
+            Remember?
+          </ToggleButton>
         </CookieDiv>
       )}
     </>
@@ -53,14 +82,7 @@ const AcceptBtn = styled.button`
     font-weight: bold;
   }
 `
-const EnoughBtn = styled.button`
-  background-color: #131516;
-  margin-left: 25px;
-  color: darkgrey;
-  :hover {
-    font-weight: bold;
-  }
-`
+
 const CookieMsgSmall = styled.p`
   font-size: 15px;
   margin: 15px 25px 0;
