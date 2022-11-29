@@ -1,10 +1,21 @@
 import styled from 'styled-components'
 import { Api } from './Api'
+import Button from 'react-bootstrap/Button'
+import { auth, removeFromWatchlist } from '../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 export default function MovieSection() {
+  const [user] = useAuthState(auth)
   return (
     <>
       <MovieDiv>
+        {user ? (
+          <Button
+            onClick={() => removeFromWatchlist(user.uid, '13231233123123123')}
+          ></Button>
+        ) : (
+          console.log('nothing')
+        )}
         <MovieTitle>Releases in December</MovieTitle>
         <CardDiv>
           <Api movieId='8228183' />
